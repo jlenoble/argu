@@ -1,0 +1,13 @@
+{
+  "generator-wupjs": {
+    "module": "argu",
+    "description": "Helper for preprocessing arguments before passing to functions",
+    "author": "Jason Lenoble",
+    "email": "jason.lenoble@gmail.com",
+    "github": "jlenoble",
+    "license": "MIT",
+    "transpile": "es2015",
+    "addons": [],
+    "Class": "Argu"
+  }
+}
