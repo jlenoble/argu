@@ -3,10 +3,14 @@ import {error} from 'explanation';
 
 const isArray = Array.isArray;
 
-export class Args {
+class Args {
   constructor(args) {
     this.args = args;
   }
+}
+
+export default function args (...args) {
+  return new Args(args);
 }
 
 export function toArray (...args) {
@@ -46,11 +50,19 @@ export function toArrayOfArrays (...args) {
 }
 
 export function toArgs (...args) {
+  if (args.length === 1 && args[0] instanceof Args) {
+    return new Args(args[0].args);
+  }
   return new Args(args);
 }
 
 export function toArrayOfArgs(...args) {
-  return args.map(arg => new Args(toArray(arg)));
+  return args.map(arg => {
+    if (arg instanceof Args) {
+      return new Args(arg.args);
+    }
+    return new Args(toArray(arg));
+  });
 }
 
 export function fromPropertyFactory (property) {
@@ -73,3 +85,5 @@ export function fromPropertyFactory (property) {
     };
   }(property));
 }
+
+export const fromArgs = fromPropertyFactory('args');

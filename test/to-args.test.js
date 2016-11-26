@@ -1,16 +1,15 @@
 import {expect} from 'chai';
-import {Args, toArgs, fromPropertyFactory} from '../src/argu';
+import args, {toArgs, fromArgs} from '../src/argu';
 
 describe('Testing Argu', function() {
 
   describe(`Testing 'toArgs' helper`, function() {
 
     const array = [1, 2, 3];
-    const fromProperty = fromPropertyFactory('args');
 
     it(`Inputing ()`, function() {
-      expect(fromProperty(toArgs())).to.eql([]);
-      expect(fromProperty(toArgs())).not.to.equal([]);
+      expect(fromArgs(toArgs())).to.eql([]);
+      expect(fromArgs(toArgs())).not.to.equal([]);
     });
 
     [
@@ -49,11 +48,31 @@ describe('Testing Argu', function() {
         in: array.map(a => [a]),
         out: array.map(a => [a])
       },
+      {
+        title: 'args(1)',
+        in: [args(1)],
+        out: [1]
+      },
+      {
+        title: 'args(1, 2, 3)',
+        in: [args(1, 2, 3)],
+        out: array
+      },
+      {
+        title: 'args(1, [2], 3)',
+        in: [args(1, [2], 3)],
+        out: [1, [2], 3]
+      },
+      { // The following case is edgy, toArgs expects one set of args only
+        title: 'args(1), args([2]), 3',
+        in: [args(1), args([2]), 3],
+        out: [{args: [1]}, {args: [[2]]}, 3]
+      },
     ].forEach(test => {
 
       it(`Inputing (${test.title})`, function() {
-        expect(fromProperty(toArgs(...test.in))).to.eql(test.out);
-        expect(fromProperty(toArgs(...test.in))).not.to.equal(test.out);
+        expect(fromArgs(toArgs(...test.in))).to.eql(test.out);
+        expect(fromArgs(toArgs(...test.in))).not.to.equal(test.out);
       });
 
     });
