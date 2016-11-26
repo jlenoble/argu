@@ -3,6 +3,12 @@ import {error} from 'explanation';
 
 const isArray = Array.isArray;
 
+export class Args {
+  constructor(args) {
+    this.args = args;
+  }
+}
+
 export function toArray (...args) {
   switch (args.length) {
     case 0:
@@ -37,6 +43,14 @@ export function toArrayOfArrays (...args) {
       // Case 1, 2, 3 and case [1], [2], [2]
       return args.map(a => isArray(a) ? a : [a]);
   }
+}
+
+export function toArgs (...args) {
+  return new Args(args);
+}
+
+export function toArrayOfArgs(...args) {
+  return args.map(arg => new Args(toArray(arg)));
 }
 
 export function fromPropertyFactory (property) {
