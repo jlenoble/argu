@@ -4,7 +4,7 @@ import {error} from 'explanation';
 const isArray = Array.isArray;
 
 class Args {
-  constructor(args) {
+  constructor (args) {
     this.args = args;
   }
 }
@@ -15,37 +15,37 @@ export default function args (...args) {
 
 export function toArray (...args) {
   switch (args.length) {
-    case 0:
-      return [];
+  case 0:
+    return [];
 
-    case 1:
-      const arg = args[0];
-      if (isArray(arg)) {
-        return [...arg];
-      }
-      return [arg];
+  case 1:
+    const arg = args[0];
+    if (isArray(arg)) {
+      return [...arg];
+    }
+    return [arg];
 
-    default:
-      return args;
+  default:
+    return args;
   }
 }
 
 export function toArrayOfArrays (...args) {
   switch (args.length) {
-    case 0:
-      return [[]];
+  case 0:
+    return [[]];
 
-    case 1:
-      // Case [1, 2, 3] and case [[1], [2], [3]]
-      const arg = args[0];
-      if (isArray(arg)) {
-        return arg.map(a => isArray(a) ? a : [a]);
-      }
-      return [[arg]];
+  case 1:
+    // Case [1, 2, 3] and case [[1], [2], [3]]
+    const arg = args[0];
+    if (isArray(arg)) {
+      return arg.map(a => isArray(a) ? a : [a]);
+    }
+    return [[arg]];
 
-    default:
-      // Case 1, 2, 3 and case [1], [2], [2]
-      return args.map(a => isArray(a) ? a : [a]);
+  default:
+    // Case 1, 2, 3 and case [1], [2], [2]
+    return args.map(a => isArray(a) ? a : [a]);
   }
 }
 
@@ -56,7 +56,7 @@ export function toArgs (...args) {
   return new Args(args);
 }
 
-export function toArrayOfArgs(...args) {
+export function toArrayOfArgs (...args) {
   return args.map(arg => {
     if (arg instanceof Args) {
       return new Args(arg.args);
@@ -72,13 +72,13 @@ export function fromPropertyFactory (property) {
       explain: [
         'In function fromPropertyFactory, failed to create fromProperty',
         'because init argument is not a string.',
-        ['It is:', property]
-      ]
+        ['It is:', property],
+      ],
     });
   }
 
   return (function (property) {
-    return function fromProperty(obj) {
+    return function (obj) {
       if (obj && obj[property]) {
         return obj[property];
       }
