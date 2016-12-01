@@ -14,8 +14,8 @@ import {toArray} from 'argu';
 
 toArray();        // []
 toArray(1);       // [1]
-toArray(1, 2, 3); // [1, 2, 3]
 toArray([1]);     // [1]
+toArray(1, 2);    // [1, 2]
 toArray(1, [2]);  // [1, [2]]
 toArray([1], 2);  // [[1], 2]
 toArray([1, 2]);  // [1, 2]
@@ -30,13 +30,13 @@ import {toArrayOfArrays} from 'argu';
 
 toArrayOfArrays();          // [[]]
 toArrayOfArrays(1);         // [[1]]
-toArrayOfArrays(1, 2, 3);   // [[1], [2], [3]]
 toArrayOfArrays([1]);       // [[1]]
+toArrayOfArrays(1, 2);      // [[1], [2]]
 toArrayOfArrays(1, [2]);    // [[1], [2]]
 toArrayOfArrays([1], 2);    // [[1], [2]]
-toArrayOfArrays([1, 2]);    // [[1, 2]]
+toArrayOfArrays([1, 2]);    // [[1], [2]]
 toArrayOfArrays([1], [2]);  // [[1], [2]]
-toArrayOfArrays([[1], 2]);  // [[[1], 2]]
+toArrayOfArrays([[1], 2]);  // [[1], [2]]
 ```
 
 ## License
