@@ -42,5 +42,7 @@
     "is-string": "^1.0.4",
     "plumb-gulp": "^0.1.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "explanation": "^0.1.0"
+  }
 }
