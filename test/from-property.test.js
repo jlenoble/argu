@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {fromPropertyFactory} from '../src/argu';
+import fromPropertyFactory from '../src/from-property';
 
 describe('Testing Argu', function() {
 

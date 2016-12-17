@@ -1,8 +1,6 @@
 import {expect} from 'chai';
-import {
-  toArray,
-  toArrayOfArrays
-} from '../src/argu';
+import toArray from '../src/to-array';
+import toArrayOfArrays from '../src/to-array-of-arrays';
 
 describe('Testing README examples', function() {
 

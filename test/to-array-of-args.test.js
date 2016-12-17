@@ -1,5 +1,7 @@
 import {expect} from 'chai';
-import args, {toArrayOfArgs, fromArgs} from '../src/argu';
+import args from '../src/argu';
+import toArrayOfArgs from '../src/to-array-of-args';
+import {fromArgs} from '../src/from-property';
 
 describe('Testing Argu', function() {
 

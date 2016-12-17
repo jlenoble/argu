@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {toArrayOfArrays} from '../src/argu';
+import toArrayOfArrays from '../src/to-array-of-arrays';
 
 describe('Testing Argu', function() {
 
