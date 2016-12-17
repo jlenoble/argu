@@ -1,6 +1,6 @@
 {
   "name": "argu",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Helper for preprocessing arguments before passing to functions",
   "main": "lib/argu.js",
   "scripts": {
