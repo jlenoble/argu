@@ -1,6 +1,6 @@
 {
   "name": "argu",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Helper for preprocessing arguments before passing to functions",
   "main": "lib/argu.js",
   "scripts": {
@@ -43,8 +43,6 @@
     "plumb-gulp": "^0.1.0"
   },
   "dependencies": {
-    "chance": "^1.0.4",
-    "explanation": "^0.1.0",
-    "stack-trace": "0.0.9"
+    "explanation": "^0.1.0"
   }
 }
