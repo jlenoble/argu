@@ -31,7 +31,6 @@
     "chai": "^3.5.0",
     "del": "^2.2.1",
     "eslint-config-google": "^0.7.0",
-    "explanation": "^0.1.0",
     "gulp": "git://github.com/gulpjs/gulp.git#4.0",
     "gulp-babel": "^6.1.2",
     "gulp-eslint": "^3.0.1",
@@ -43,6 +42,6 @@
     "plumb-gulp": "^0.1.0"
   },
   "dependencies": {
-    "explanation": "^0.1.0"
+    "explanation": "^0.1.1"
   }
 }
