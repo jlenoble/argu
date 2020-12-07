@@ -8,6 +8,34 @@
     "license": "MIT",
     "transpile": "es2015",
     "addons": [],
-    "Class": "Argu"
+    "Class": "Argu",
+    "createdWith": "0.6.0-10",
+    "modifiedWith": "0.6.0-10",
+    "createdOn": "2020-12-07T15:16:35.558Z",
+    "modifiedOn": "2020-12-07T15:16:35.558Z",
+    "gulp": true,
+    "srcDir": "src",
+    "testDir": "test",
+    "buildDir": "build",
+    "docDir": "docs",
+    "libDir": "lib",
+    "gulpDir": "gulp",
+    "typescript": true,
+    "jsx": false,
+    "extensions": [
+      "ts"
+    ],
+    "jupyter": false,
+    "antlr4": false,
+    "server": true,
+    "client": false,
+    "devModuleTypes": [
+      "ES6"
+    ],
+    "prodModuleTypes": [
+      "CommonJS"
+    ],
+    "monorepo": false,
+    "hasGulpfilesDir": false
   }
 }
