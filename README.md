@@ -1,5 +1,9 @@
 # argu
+
 Helper for preprocessing arguments before passing to functions
+
+  * [License](#license)
+
 
 ## Usage
 
@@ -39,8 +43,19 @@ toArrayOfArrays([1], [2]);  // [[1], [2]]
 toArrayOfArrays([[1], 2]);  // [[1], [2]]
 ```
 
+```js
+// File "./usage.test.ts"
+import Argu from "argu";
+
+const defaultArgs = [];
+
+new Argu(...defaultArgs);
+```
+
+
 ## License
 
 argu is [MIT licensed](./LICENSE).
 
-© 2016 [Jason Lenoble](mailto:jason.lenoble@gmail.com)
+© 2020 [Jason Lenoble](mailto:jason.lenoble@gmail.com)
+
