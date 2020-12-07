@@ -1,14 +1,14 @@
-import isString from 'is-string';
-import {error} from 'explanation';
+import isString from "is-string";
+import { error } from "explanation";
 
-export default function fromPropertyFactory (property) {
+export default function fromPropertyFactory(property) {
   if (!isString(property)) {
     error({
       message: `'property' is not a string`,
       explain: [
-        'In function fromPropertyFactory, failed to create fromProperty',
-        'because init argument is not a string.',
-        ['It is:', property],
+        "In function fromPropertyFactory, failed to create fromProperty",
+        "because init argument is not a string.",
+        ["It is:", property],
       ],
     });
   }
@@ -19,7 +19,7 @@ export default function fromPropertyFactory (property) {
         return obj[property];
       }
     };
-  }(property));
+  })(property);
 }
 
-export const fromArgs = fromPropertyFactory('args');
+export const fromArgs = fromPropertyFactory("args");

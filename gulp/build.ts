@@ -1,14 +1,11 @@
-import {src, dest, lastRun, task} from 'gulp';
-import babel from 'gulp-babel';
-import sourcemaps from 'gulp-sourcemaps';
-import cached from 'gulp-cached';
-import newer from 'gulp-newer';
+import { src, dest, lastRun, task } from "gulp";
+import babel from "gulp-babel";
+import sourcemaps from "gulp-sourcemaps";
+import cached from "gulp-cached";
+import newer from "gulp-newer";
 
-const buildDir = 'build';
-const srcGlob = [
-  'src/**/*.ts',
-  'test/**/*.ts',
-];
+const buildDir = "build";
+const srcGlob = ["src/**/*.ts", "test/**/*.ts"];
 
 export const handleBuild = () => {
   return src(srcGlob, {
@@ -19,14 +16,14 @@ export const handleBuild = () => {
     .pipe(cached())
     .pipe(sourcemaps.init())
     .pipe(babel())
-    .pipe(sourcemaps.write('.', {
-      sourceRoot: file => file.cwd,
-    }))
+    .pipe(
+      sourcemaps.write(".", {
+        sourceRoot: (file) => file.cwd,
+      })
+    )
     .pipe(dest(buildDir));
 };
 
 const build = handleBuild;
 
-
-task('build', build);
-
+task("build", build);

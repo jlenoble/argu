@@ -1,40 +1,40 @@
-import gulp, {series} from 'gulp';
-import childProcessData from 'child-process-data';
-import './prepublish';
+import gulp, { series } from "gulp";
+import childProcessData from "child-process-data";
+import "./prepublish";
 
 class GitHandler {
-  async getActiveBranch () {
+  async getActiveBranch() {
     if (!this.activeBranch) {
-      const result = await childProcessData(['git', ['branch']], {
+      const result = await childProcessData(["git", ["branch"]], {
         silent: true,
       });
 
-      this.lines = result.out().split('\n');
-      const filteredLines = this.lines.filter(line => /^\* \w+/.test(line));
+      this.lines = result.out().split("\n");
+      const filteredLines = this.lines.filter((line) => /^\* \w+/.test(line));
 
       if (filteredLines.length === 1) {
         this.activeBranch = filteredLines[0].substring(2);
       } else {
-        throw new Error('Failed to get active branch');
+        throw new Error("Failed to get active branch");
       }
     }
 
     return this.activeBranch;
   }
 
-  async getDevBranch () {
+  async getDevBranch() {
     if (!this.devBranch) {
       const activeBranch = await this.getActiveBranch();
       this.devBranch = activeBranch;
 
-      if (activeBranch === 'master') {
+      if (activeBranch === "master") {
         if (this.lines.length === 2) {
           this.devBranch = this.lines
-            .filter(line => !/^\* \w+/.test(line))[0]
+            .filter((line) => !/^\* \w+/.test(line))[0]
             .substring(2);
         } else {
           throw new Error(
-            'Already on branch master; Cannot determine dev branch',
+            "Already on branch master; Cannot determine dev branch"
           );
         }
       }
@@ -43,57 +43,57 @@ class GitHandler {
     return this.devBranch;
   }
 
-  async checkoutMaster () {
+  async checkoutMaster() {
     const activeBranch = await this.getActiveBranch();
 
-    if (activeBranch === 'master') {
+    if (activeBranch === "master") {
       return;
     }
 
     const devBranch = await this.getDevBranch();
 
-    if (typeof devBranch === 'string' && devBranch !== 'master') {
-      await childProcessData(['git', ['checkout', 'master']]);
-      this.activeBranch = 'master';
+    if (typeof devBranch === "string" && devBranch !== "master") {
+      await childProcessData(["git", ["checkout", "master"]]);
+      this.activeBranch = "master";
     } else {
-      throw new Error('Won\'t checkout master: dev branch is undetermined');
+      throw new Error("Won't checkout master: dev branch is undetermined");
     }
   }
 
-  async mergeIntoMaster () {
+  async mergeIntoMaster() {
     const devBranch = await this.getDevBranch();
 
     await this.checkoutMaster();
 
-    if (typeof devBranch === 'string' && devBranch !== 'master') {
-      await childProcessData(['git', ['merge', 'master', devBranch]]);
+    if (typeof devBranch === "string" && devBranch !== "master") {
+      await childProcessData(["git", ["merge", "master", devBranch]]);
     } else {
-      throw new Error('Won\'t merge into master: dev branch is undetermined');
+      throw new Error("Won't merge into master: dev branch is undetermined");
     }
   }
 
-  async pushToOrigin () {
+  async pushToOrigin() {
     const activeBranch = await this.getActiveBranch();
 
-    if (activeBranch === 'master') {
-      await childProcessData(['git', ['push']]);
+    if (activeBranch === "master") {
+      await childProcessData(["git", ["push"]]);
     } else {
-      throw new Error('Not on master branch; Won\'t push to origin');
+      throw new Error("Not on master branch; Won't push to origin");
     }
   }
 
-  async checkoutDevBranch () {
+  async checkoutDevBranch() {
     const devBranch = await this.getDevBranch();
 
     if (this.activeBranch === devBranch) {
       return;
     }
 
-    if (typeof devBranch === 'string' && devBranch !== 'master') {
-      await childProcessData(['git', ['checkout', devBranch]]);
+    if (typeof devBranch === "string" && devBranch !== "master") {
+      await childProcessData(["git", ["checkout", devBranch]]);
       this.activeBranch = devBranch;
     } else {
-      throw new Error('Dev branch is undetermined; Cannot check it out');
+      throw new Error("Dev branch is undetermined; Cannot check it out");
     }
   }
 }
@@ -107,13 +107,13 @@ const push = async () => {
 };
 
 gulp.task(
-  'push',
+  "push",
   series(
-    'test',
-    gulp.parallel('lint', 'dist-clean', 'doc'),
-    'dist-test',
-    'types',
+    "test",
+    gulp.parallel("lint", "dist-clean", "doc"),
+    "dist-test",
+    "types",
     push,
-    'sanity-check',
-  ),
+    "sanity-check"
+  )
 );

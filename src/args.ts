@@ -1,5 +1,5 @@
 export default class Args {
-  constructor (args) {
+  constructor(args) {
     this.args = args;
   }
 }

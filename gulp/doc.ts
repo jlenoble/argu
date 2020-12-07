@@ -1,33 +1,31 @@
-import gulp from 'gulp';
-import path from 'path';
-import md from 'markdown-include';
-import replace from 'gulp-replace';
-import rename from 'gulp-rename';
-import wrap from 'gulp-wrap';
-import babel from 'gulp-babel';
+import gulp from "gulp";
+import path from "path";
+import md from "markdown-include";
+import replace from "gulp-replace";
+import rename from "gulp-rename";
+import wrap from "gulp-wrap";
+import babel from "gulp-babel";
 
-const docConf = 'markdown.json';
-const examplesGlob = [
-  'docs/examples/**/*.ts',
-];
-const buildDir = 'build';
+const docConf = "markdown.json";
+const examplesGlob = ["docs/examples/**/*.ts"];
+const buildDir = "build";
 
 md.includePattern = /^#include\s"\/?((\w|-)+\/)*(\w|-)+(\.test)?\.md"/gm;
 
 md.reset = function () {
-  md.tableOfContents = '';
+  md.tableOfContents = "";
   md.build = {};
 };
 
 md.buildLink = function (title, _anchor) {
   const anchor = _anchor
-    .replace(/\W+/g, '-')
-    .replace(/--+/g, '-')
-    .replace(/^-/, '')
-    .replace(/-$/, '')
+    .replace(/\W+/g, "-")
+    .replace(/--+/g, "-")
+    .replace(/^-/, "")
+    .replace(/-$/, "")
     .toLowerCase();
 
-  return '[' + title + '](#' + anchor + ')\n';
+  return "[" + title + "](#" + anchor + ")\n";
 };
 
 export const compileDocs = () => {
@@ -43,25 +41,25 @@ export const jsToDocs = () => {
     })
     .pipe(
       wrap(
-        '```js\n<\%- pathComment(file) %\><\%- contents %\>```',
+        "```js\n<%- pathComment(file) %><%- contents %>```",
         {
-          pathComment (file) {
+          pathComment(file) {
             if (/\.test.js$/.test(file.path)) {
-              return '';
+              return "";
             }
 
             return `// File "./${path.basename(file.path)}"\n`;
           },
         },
-        {parse: false, engine: 'ejs'},
-      ),
+        { parse: false, engine: "ejs" }
+      )
     )
-    .pipe(replace(/\/\*[\s\S]*?\*\/\n/gm, ''))
+    .pipe(replace(/\/\*[\s\S]*?\*\/\n/gm, ""))
     .pipe(replace(/path.join\(__dirname,\s+"([^"]+)"\s*\)/gm, '"./$1"'))
     .pipe(
       rename({
-        extname: '.md',
-      }),
+        extname: ".md",
+      })
     )
     .pipe(gulp.dest(buildDir));
 };
@@ -79,13 +77,13 @@ import { expect } from "chai";
 <\%- contents %\>
 `,
         {},
-        {parse: false, engine: 'ejs'},
-      ),
+        { parse: false, engine: "ejs" }
+      )
     )
-    .pipe(replace(/\/\*([\s\S]*?)\*\//gm, '$1'))
-    .pipe(replace(/(?=((import[\s\S]+?)(argu)))\1/m, '$2../../../lib/$3'))
+    .pipe(replace(/\/\*([\s\S]*?)\*\//gm, "$1"))
+    .pipe(replace(/(?=((import[\s\S]+?)(argu)))\1/m, "$2../../../lib/$3"))
     .pipe(babel())
     .pipe(gulp.dest(buildDir));
 };
 
-gulp.task('doc', gulp.series(gulp.parallel(jsToDocs, jsToTests), compileDocs));
+gulp.task("doc", gulp.series(gulp.parallel(jsToDocs, jsToTests), compileDocs));

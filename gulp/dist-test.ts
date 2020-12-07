@@ -1,13 +1,11 @@
-import {src, task, series} from 'gulp';
-import mocha from 'gulp-mocha';
-import {resolveGlob} from 'polypath';
-import streamToPromise from 'stream-to-promise';
+import { src, task, series } from "gulp";
+import mocha from "gulp-mocha";
+import { resolveGlob } from "polypath";
+import streamToPromise from "stream-to-promise";
 
-import './dist-build';
+import "./dist-build";
 
-const testGlob = [
-  'build/docs/examples/**/*.test.js',
-];
+const testGlob = ["build/docs/examples/**/*.test.js"];
 
 export const handleDistTest = async () => {
   const files = await resolveGlob(testGlob);
@@ -18,12 +16,12 @@ export const handleDistTest = async () => {
   }
 
   await streamToPromise(
-    src(files, {read: false}).pipe(
+    src(files, { read: false }).pipe(
       mocha({
-        reporter: 'mochawesome',
-      }),
-    ),
+        reporter: "mochawesome",
+      })
+    )
   );
 };
 
-task('dist-test', series('dist-build', handleDistTest));
+task("dist-test", series("dist-build", handleDistTest));
