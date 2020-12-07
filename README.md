@@ -2,6 +2,9 @@
 
 Helper for preprocessing arguments before passing to functions
 
+  * [Usage](#usage)
+    * [```toArray```](#toarray)
+    * [```toArrayOfArrays```](#toarrayofarrays)
   * [License](#license)
 
 
