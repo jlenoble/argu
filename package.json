@@ -100,7 +100,7 @@
     "mkdirp": "^1.0.4",
     "mocha": "^8.2.1",
     "mochawesome": "^6.2.1",
-    "organon": "^0.1.0-8",
+    "organon": "file:../organon",
     "plumb-gulp": "^0.2.2",
     "polypath": "^0.7.0",
     "prettier": "^2.2.1",
